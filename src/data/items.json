@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "price": 10,
+    "name": "iphone 17 pro max",
+    "imageUrl": "/images/grey.webp"
+  },
+  {
+    "id": 2,
+    "price": 20,
+    "name": "iphone 18 pro max",
+    "imageUrl": "/images/17.webp"
+  },
+  {
+    "id": 3,
+    "price": 30,
+    "name": "iphone 19 pro max",
+    "imageUrl": "/images/blue.webp"
+  }
+]
