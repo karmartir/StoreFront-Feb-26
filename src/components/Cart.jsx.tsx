@@ -1,7 +1,6 @@
-export default function Cart(){
-	return (
-		<div>
-			Cart
-		</div>
-	)
+type CartProps = {
+  isCartOpen: boolean;
+};
+export default function Cart({ isCartOpen }: CartProps) {
+  return <>{isCartOpen && <div>Cart</div>}</>;
 }

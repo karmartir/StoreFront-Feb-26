@@ -29,22 +29,18 @@ type CartItem = {
 }
 type StoreItem = {
 	id: number,
-	quantity: number
+	name: string
 }
 
 // creating Context
-export const ShoppingCartContext: Context<ShoppingCartContext> = createContext(
+const ShoppingCartContext: Context<ShoppingCartContext> = createContext(
   {} as ShoppingCartContext);
 
 
 //custom hook
 export function useShoppingCart(){
 	const context = useContext(ShoppingCartContext)
-	// checking, if it exists
-	if (!context) {
-		throw new Error("useShoppingCart must be used within a ShoppingCartProvider");
-	}
-	return context
+	return context;
 }
 
 //Context Provider with all our states and functions
@@ -65,8 +61,8 @@ export function ShoppingCartProvider({children}: ShoppingCartProviderProps ) {
 	const openCart = () => setIsCartOpen(true)
 	const closeCart = () => setIsCartOpen(false)
 	
-	const openSearchComponent = () => setIsSearchOpen(true)
-	const closeSearchComponent = () => setIsSearchOpen(false)
+	// const openSearchComponent = () => setIsSearchOpen(true)
+	// const closeSearchComponent = () => setIsSearchOpen(false)
 	
 	// getting ONE item quantity
 	const getItemQuantity = (id: number) => {
