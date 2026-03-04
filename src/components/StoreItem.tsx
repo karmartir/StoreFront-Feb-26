@@ -9,7 +9,7 @@ type StoreItemProps = {
 }
 
 function StoreItem({id, price, name, imageUrl}: StoreItemProps) {
-	const {getItemQuantity, increaseCartItem, decreaseCartItem, deleteCartItem} = useShoppingCart()
+	const {getItemQuantity, increaseItemQuantity, decreaseItemQuantity, deleteCartItem} = useShoppingCart()
 
 	const quantity = getItemQuantity(id)
 	return (
@@ -29,13 +29,13 @@ function StoreItem({id, price, name, imageUrl}: StoreItemProps) {
 				{/*	bulk of the card's content.*/}
 				{/*</Card.Text>*/}
 				<div >
-					{quantity=== 0 ? (<Button onClick={() => increaseCartItem(id)} className="w-100 " variant="secondary">Add to cart</Button>)
+					{quantity=== 0 ? (<Button onClick={() => increaseItemQuantity(id)} className="w-100 " variant="secondary">Add to cart</Button>)
 						: (
 							<div className="d-flex flex-column justify-content-around align-items-center ">
 								<div className="d-flex justify-content-around align-items-center gap-2 mb-2 w-100">
-									<Button variant="secondary" onClick={() => decreaseCartItem(id)}>-</Button>
+									<Button variant="secondary" onClick={() => decreaseItemQuantity(id)}>-</Button>
 									<span>{quantity}</span>
-									<Button variant="secondary" onClick={() => increaseCartItem(id)}>+</Button>
+									<Button variant="secondary" onClick={() => increaseItemQuantity(id)}>+</Button>
 								</div>
 								<Button variant='danger' onClick={() => deleteCartItem(id)}>Remove</Button>
 							</div>

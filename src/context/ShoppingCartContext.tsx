@@ -21,9 +21,9 @@ type ShoppingCartContextType = {
 	cartQuantity: number,
 	openCart: () => void,
 	closeCart: () => void,
-	increaseCartItem: (id: number) => void,
-	decreaseCartItem: (id: number) => void,
 	deleteCartItem: (id: number) => void,
+	increaseItemQuantity: (id: number) => void,
+	decreaseItemQuantity: (id: number) => void,
 }
 const ShoppingCartContext = createContext<ShoppingCartContextType>(
   {} as ShoppingCartContextType
@@ -56,12 +56,12 @@ export function ShoppingCartProvider({children}: ShoppingCartProviderProps ) {
 	};
 	
 	
-	const increaseCartItem = (id: number) => {
-		setCartItems((currentItems) => {
-			if (currentItems.find((item) => item.id === id) === undefined) {
-				return [...currentItems, { id, quantity: 1 }];
+	const increaseItemQuantity = (id: number) => {
+		setCartItems((currCartItems) => {
+			if (currCartItems.find((item) => item.id === id) == null) {
+				return [...currCartItems, { id, quantity: 1 }];
 			} else {
-				return currentItems.map((item) => {
+				return currCartItems.map((item) => {
 					if (item.id === id) {
 						return { ...item, quantity: item.quantity + 1 };
 					} else {
@@ -71,43 +71,44 @@ export function ShoppingCartProvider({children}: ShoppingCartProviderProps ) {
 			}
 		});
 	};
-	const decreaseCartItem = (id: number) => {
-    setCartItems(prev => {
-      const existing = prev.find(item => item.id === id);
-      if (!existing) return prev;
-
-      if (existing.quantity === 1) {
-        return prev.filter(item => item.id !== id);
+	const decreaseItemQuantity = (id: number) => {
+    setCartItems(currCartItems => {
+      if (currCartItems.find(item => item.id === id)?.quantity === 1) {
+        return currCartItems.filter(item => item.id !== id);
+      } else {
+        return currCartItems.map(item => {
+          if (item.id === id) {
+            return { ...item, quantity: item.quantity - 1 }
+          } else {
+			return item;
+			}
+        });
       }
-
-      return prev.map(item =>
-        item.id === id
-          ? { ...item, quantity: item.quantity - 1 }
-          : item
-      );
     });
-	}
+  }
+		  
 	const deleteCartItem = (id: number) => {
-		
-		setCartItems(prev => prev.filter(item => item.id !== id));
+		setCartItems(currCartItems => currCartItems.filter(item => item.id !== id));
 	}
 	return (
 		<ShoppingCartContext.Provider value={{
 			cartItems,
-			isCartOpen,
-			isSearchOpen,
+			cartQuantity,
+			openCart,
+			closeCart,
+			deleteCartItem,
+			increaseItemQuantity,
+			decreaseItemQuantity,
 			setIsSearchOpen,
 			searchItemText,
 			setSearchItemText,
 			filteredItems,
 			setFilteredItems,
 			cartQuantity,
-			openCart,
-			closeCart,
+			isCartOpen,
+			isSearchOpen,
 			getItemQuantity,
-			increaseCartItem,
-			decreaseCartItem,
-			deleteCartItem}}>
+			}}>
 			{children}
 			<Cart isCartOpen={isCartOpen}/>
 		</ShoppingCartContext.Provider>
