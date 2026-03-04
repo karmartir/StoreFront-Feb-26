@@ -1,10 +1,16 @@
 import {Offcanvas} from "react-bootstrap";
 
-export function SearchComponent(){
+type SearchComponentProps = {
+	isSearchOpen: boolean,
+	closeSearchComponent: () => void
+}
+
+
+export function SearchComponent({isSearchOpen, closeSearchComponent}: SearchComponentProps){
 	return (
-		<Offcanvas show={show} onHide={handleClose}>
+		<Offcanvas show={isSearchOpen} onHide={closeSearchComponent}>
 			<Offcanvas.Header closeButton>
-				<Offcanvas.Title>Offcanvas</Offcanvas.Title>
+				<Offcanvas.Title>Search Results:</Offcanvas.Title>
 			</Offcanvas.Header>
 			<Offcanvas.Body>
 				Some text as placeholder. In real life you can have the elements you

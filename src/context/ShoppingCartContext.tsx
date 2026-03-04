@@ -1,6 +1,7 @@
 import {type Context, createContext, type ReactNode, useContext, useState} from "react";
 import Cart from "../components/Cart.jsx.tsx";
 import storeItems from "../data/items.json";
+import {SearchComponent} from "../components/SearchComponent.tsx";
 
 //типизируем 
 type ShoppingCartProviderProps = {
@@ -22,6 +23,7 @@ type ShoppingCartContext = {
 	getItemQuantity: (id: number) => number,
 	setIsSearchOpen: (open: boolean) => void,
 	isCartOpen: boolean,
+	openSearchComponent: () => void,
 }
 type CartItem = {
 	id: number,
@@ -61,8 +63,8 @@ export function ShoppingCartProvider({children}: ShoppingCartProviderProps ) {
 	const openCart = () => setIsCartOpen(true)
 	const closeCart = () => setIsCartOpen(false)
 	
-	// const openSearchComponent = () => setIsSearchOpen(true)
-	// const closeSearchComponent = () => setIsSearchOpen(false)
+	const openSearchComponent = () => setIsSearchOpen(true)
+	const closeSearchComponent = () => setIsSearchOpen(false)
 	
 	// getting ONE item quantity
 	const getItemQuantity = (id: number) => {
@@ -121,9 +123,14 @@ export function ShoppingCartProvider({children}: ShoppingCartProviderProps ) {
 			isCartOpen,
 			isSearchOpen,
 			getItemQuantity,
+			openSearchComponent,
 			}}>
 			{children}
 			<Cart isCartOpen={isCartOpen}/>
+			<SearchComponent
+				isSearchOpen={isSearchOpen}
+				closeSearchComponent={closeSearchComponent}
+			/>
 		</ShoppingCartContext.Provider>
 	)
 }

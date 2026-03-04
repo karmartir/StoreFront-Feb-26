@@ -1,13 +1,15 @@
-import {Container, Image, Nav, Navbar as NavbarBs, NavbarBrand, NavbarCollapse, NavbarToggle} from "react-bootstrap";
+import {Container, Image, Nav, Navbar as NavbarBs, NavbarBrand, NavbarCollapse, NavbarToggle, Form} from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import { useShoppingCart } from "../context/ShoppingCartContext";
+import { CgSearchFound } from "react-icons/cg";
 
 const Navbar = () => {
-	const {isCartOpen, openCart, closeCart, setSearchItemText, isSearchOpen, openSearchComponent, closeSearchComponent} = useShoppingCart()
+	const {isCartOpen, openCart, closeCart, cartQuantity, isSearchOpen, searchItemText, setSearchItemText, openSearchComponent, closeSearchComponent} = useShoppingCart()
+
 	const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
 		e.preventDefault()
 		setSearchItemText(e.target.value)
-		if(isSearchOpen){
+		if(!isSearchOpen){
 			openSearchComponent()
 		}
 		
@@ -28,9 +30,17 @@ const Navbar = () => {
 						<Nav.Link as={NavLink} to="/">Home</Nav.Link>
 						<Nav.Link as={NavLink} to="/gallery">Gallery</Nav.Link>
 						<Nav.Link as={NavLink} to="/about-us">About us</Nav.Link>
-						
-					
 					</Nav>
+					<div onClick={handleSearch}>
+						<CgSearchFound />
+						{/*<Form>*/}
+						{/*	<Form.Control*/}
+						{/*	 placeholder="Search item"*/}
+						{/*	 readOnly={true}*/}
+						{/*	 onChange={handleSearch}*/}
+						{/*	/>*/}
+						{/*</Form>*/}
+					</div>
 				</NavbarCollapse>
 			</Container>
 		</NavbarBs>
