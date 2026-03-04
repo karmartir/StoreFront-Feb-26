@@ -1,7 +1,17 @@
 import {Container, Image, Nav, Navbar as NavbarBs, NavbarBrand, NavbarCollapse, NavbarToggle} from "react-bootstrap";
 import { NavLink } from "react-router-dom";
+import { useShoppingCart } from "../context/ShoppingCartContext";
 
 const Navbar = () => {
+	const {isCartOpen, openCart, closeCart, setSearchItemText, isSearchOpen, openSearchComponent, closeSearchComponent} = useShoppingCart()
+	const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+		e.preventDefault()
+		setSearchItemText(e.target.value)
+		if(isSearchOpen){
+			openSearchComponent()
+		}
+		
+	}
 	return (
 		<NavbarBs sticky='top' expand="lg" className="bg-light shadow-sm mb-5 vw-100" >
 			<Container >
