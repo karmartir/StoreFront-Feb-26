@@ -1,49 +1,66 @@
-import {createContext, type ReactNode, useContext, useState} from "react";
+import {type Context, createContext, type ReactNode, useContext, useState} from "react";
 import Cart from "../components/Cart.jsx.tsx";
 import storeItems from "../data/items.json";
+
+//типизируем 
 type ShoppingCartProviderProps = {
 	children: ReactNode;
+}
+type ShoppingCartContext = {
+	cartItems: CartItem[],
+	cartQuantity: number,
+	searchItemText: string,
+	setSearchItemText: (text: string) => void,
+	filteredItems: StoreItem[],
+	setFilteredItems: (items: StoreItem[]) => void,
+	isSearchOpen: boolean,
+	openCart: () => void,
+	closeCart: () => void,
+	increaseItemQuantity: (id: number) => void,
+	decreaseItemQuantity: (id: number) => void,
+	deleteCartItem: (id: number) => void,
+	getItemQuantity: (id: number) => number,
+	setIsSearchOpen: (open: boolean) => void,
+	isCartOpen: boolean,
 }
 type CartItem = {
 	id: number,
 	quantity: number
 }
-type ShoppingCartContextType = {
-	cartItems: CartItem[],
-	isCartOpen: boolean,
-	isSearchOpen: boolean,
-	setIsSearchOpen: (open: boolean) => void,
-	searchItemText: string,
-	setSearchItemText: (text: string) => void,
-	filteredItems: typeof storeItems,
-	setFilteredItems: (items: typeof storeItems) => void,
-	getItemQuantity: (id: number) => number,
-	cartQuantity: number,
-	openCart: () => void,
-	closeCart: () => void,
-	deleteCartItem: (id: number) => void,
-	increaseItemQuantity: (id: number) => void,
-	decreaseItemQuantity: (id: number) => void,
+type StoreItem = {
+	id: number,
+	quantity: number
 }
-const ShoppingCartContext = createContext<ShoppingCartContextType>(
-  {} as ShoppingCartContextType
-);
 
-export { ShoppingCartContext };
+// creating Context
+export const ShoppingCartContext: Context<ShoppingCartContext> = createContext(
+  {} as ShoppingCartContext);
 
+
+//custom hook
+export function useShoppingCart(){
+	const context = useContext(ShoppingCartContext)
+	// checking, if it exists
+	if (!context) {
+		throw new Error("useShoppingCart must be used within a ShoppingCartProvider");
+	}
+	return context
+}
+
+//Context Provider with all our states and functions
 export function ShoppingCartProvider({children}: ShoppingCartProviderProps ) {
 	//states
 	const [cartItems, setCartItems] = useState<CartItem[]>([]); // todo use local storage
 	const [isCartOpen, setIsCartOpen] = useState(false);
 	const [isSearchOpen, setIsSearchOpen] = useState(false);
 	const[searchItemText, setSearchItemText] = useState<string>('');
-	const [filteredItems, setFilteredItems] = useState<typeof storeItems>(storeItems);
-	//functions
+	const [filteredItems, setFilteredItems] = useState<StoreItem[]>(storeItems);
 	
+	
+	//functions	
+	// getting TOTAL quantities
 	const cartQuantity = cartItems.reduce(
-		(quantity, item) => quantity + item.quantity,
-		0
-	);
+		(quantity, item) => quantity + item.quantity, 0);
 	
 	const openCart = () => setIsCartOpen(true)
 	const closeCart = () => setIsCartOpen(false)
@@ -51,6 +68,7 @@ export function ShoppingCartProvider({children}: ShoppingCartProviderProps ) {
 	const openSearchComponent = () => setIsSearchOpen(true)
 	const closeSearchComponent = () => setIsSearchOpen(false)
 	
+	// getting ONE item quantity
 	const getItemQuantity = (id: number) => {
 		return cartItems.find((item) => item.id === id)?.quantity || 0;
 	};
@@ -104,7 +122,6 @@ export function ShoppingCartProvider({children}: ShoppingCartProviderProps ) {
 			setSearchItemText,
 			filteredItems,
 			setFilteredItems,
-			cartQuantity,
 			isCartOpen,
 			isSearchOpen,
 			getItemQuantity,
@@ -114,8 +131,5 @@ export function ShoppingCartProvider({children}: ShoppingCartProviderProps ) {
 		</ShoppingCartContext.Provider>
 	)
 }
-export function useShoppingCart(){
-	const context = useContext(ShoppingCartContext)
-	return context
-}
+
 
