@@ -5,7 +5,7 @@ type StoreItemProps = {
 	id: number,
 	price: number,
 	name: string,
-	imageUrl: string,
+	imageUrl: string | null,
 }
 
 function StoreItem({id, price, name, imageUrl}: StoreItemProps) {
@@ -16,7 +16,7 @@ function StoreItem({id, price, name, imageUrl}: StoreItemProps) {
 		<Card className={"w-[300px] h-[400px] flex-shrink-0"}>
 			<Card.Img
 				variant="top"
-				src={imageUrl}
+				src={imageUrl ? imageUrl : '/images/17.webp'}
 				className="mb-1 object-fit-cover bg-dark radius-20"
 				style={{height: '300px'}}
 			/>

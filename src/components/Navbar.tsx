@@ -1,25 +1,27 @@
-import {Container, Image, Nav, Navbar as NavbarBs, NavbarBrand, NavbarCollapse, NavbarToggle, Form} from "react-bootstrap";
+import {
+	Container,
+	Image,
+	Nav,
+	Navbar as NavbarBs,
+	NavbarBrand,
+	NavbarCollapse,
+	NavbarToggle,
+	Button
+} from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import { useShoppingCart } from "../context/ShoppingCartContext";
-import { CgSearchFound } from "react-icons/cg";
+import {cartLogo} from "./cartLogo.tsx";
+import {FaSearch} from "react-icons/fa";
 
 const Navbar = () => {
-	const {isCartOpen, openCart, closeCart, cartQuantity, isSearchOpen, searchItemText, setSearchItemText, openSearchComponent, closeSearchComponent} = useShoppingCart()
+	const {openCart, cartQuantity} = useShoppingCart()
 
-	const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-		e.preventDefault()
-		setSearchItemText(e.target.value)
-		if(!isSearchOpen){
-			openSearchComponent()
-		}
-		
-	}
 	return (
 		<NavbarBs sticky='top' expand="lg" className="bg-light shadow-sm mb-5 vw-100" >
 			<Container >
 				<NavbarBrand>
 					<NavLink to='/'>
-						<Image className='me-5 shadow-sm rounded-5' src='/images/logo.jpg' alt="logo" width={120} />
+						<Image className='me-5 shadow-sm rounded-5' src='/images/logo.jpg' alt="logo" width={100} />
 					</NavLink>
 				</NavbarBrand>
 				
@@ -31,17 +33,38 @@ const Navbar = () => {
 						<Nav.Link as={NavLink} to="/gallery">Gallery</Nav.Link>
 						<Nav.Link as={NavLink} to="/about-us">About us</Nav.Link>
 					</Nav>
-					<div onClick={handleSearch}>
-						<CgSearchFound />
-						{/*<Form>*/}
-						{/*	<Form.Control*/}
-						{/*	 placeholder="Search item"*/}
-						{/*	 readOnly={true}*/}
-						{/*	 onChange={handleSearch}*/}
-						{/*	/>*/}
-						{/*</Form>*/}
-					</div>
+				
 				</NavbarCollapse>
+				
+			<div
+				className='d-none d-lg-flex rounded-circle position-relative'
+				style={{width: '3rem', height: '3rem', background: 'lightgray', borderRadius: '50%', justifyContent: 'center', alignItems: 'center'}}>
+				<FaSearch size={20} color='white'/>
+			</div>
+					<div className="d-none d-lg-block">
+						<Button
+							onClick={openCart}
+							className='rounded-circle ms-3 position-relative'
+							style={{width: '3rem', height: '3rem', background: cartQuantity ? "black" : "lightgray", border: 'none', boxShadow: '2px 2px 5px rgba(0, 0, 0, 0.4)'}}
+							>
+							
+							<span style={{color: 'white'}}>{cartLogo}</span>
+							
+							{/*Картинка svg корзины*/}
+							{ cartQuantity > 0 && (
+							<div className='rounded-circle bg-danger d-flex justify-content-center align-items-center'
+							     style={{
+								     color: "white", width: '1.5rem', height: '1.5rem', position: 'absolute',
+								     bottom: 0, right: 0, transform: 'translate(35%, 35%)'
+							     }}
+							>
+								{cartQuantity}
+								{/*динамически cart quantity*/}
+							</div>
+							)}
+						</Button>
+					</div>
+					
 			</Container>
 		</NavbarBs>
 	);

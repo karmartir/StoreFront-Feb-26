@@ -2,19 +2,19 @@
   {
     "id": 1,
     "price": 10,
-    "name": "iphone 17 pro max",
+    "name": "iphone 17 pro",
     "imageUrl": "/images/grey.webp"
   },
   {
     "id": 2,
     "price": 20,
-    "name": "iphone 18 pro max",
+    "name": "iphone 18 pro max orange",
     "imageUrl": "/images/17.webp"
   },
   {
     "id": 3,
     "price": 30,
-    "name": "iphone 19 pro max",
+    "name": "iphone 19 deep blue",
     "imageUrl": "/images/blue.webp"
   }
 ]

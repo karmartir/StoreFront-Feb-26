@@ -1,4 +1,5 @@
 import {Offcanvas} from "react-bootstrap";
+import Store from "../pages/Store.tsx";
 
 type SearchComponentProps = {
 	isSearchOpen: boolean,
@@ -8,14 +9,19 @@ type SearchComponentProps = {
 
 export function SearchComponent({isSearchOpen, closeSearchComponent}: SearchComponentProps){
 	return (
-		<Offcanvas show={isSearchOpen} onHide={closeSearchComponent}>
+		<Offcanvas
+			show={isSearchOpen}
+			onHide={closeSearchComponent}
+			placement='end'
+			style={{width: "70%"}}
+		>
 			<Offcanvas.Header closeButton>
 				<Offcanvas.Title>Search Results:</Offcanvas.Title>
 			</Offcanvas.Header>
 			<Offcanvas.Body>
-				Some text as placeholder. In real life you can have the elements you
-				have chosen. Like, text, images, lists, etc.
+				<Store/>
 			</Offcanvas.Body>
+
 		</Offcanvas>
 	)
 }

@@ -62,7 +62,7 @@ export function ShoppingCartProvider({children}: ShoppingCartProviderProps ) {
 	
 	const openCart = () => setIsCartOpen(true)
 	const closeCart = () => setIsCartOpen(false)
-	
+
 	const openSearchComponent = () => setIsSearchOpen(true)
 	const closeSearchComponent = () => setIsSearchOpen(false)
 	
@@ -87,6 +87,7 @@ export function ShoppingCartProvider({children}: ShoppingCartProviderProps ) {
 			}
 		});
 	};
+
 	const decreaseItemQuantity = (id: number) => {
     setCartItems(currCartItems => {
       if (currCartItems.find(item => item.id === id)?.quantity === 1) {
