@@ -8,10 +8,10 @@ import { ShoppingCartProvider } from "./context/ShoppingCartContext";
 
 createRoot(document.getElementById('root')!).render(
 	<StrictMode>
-	<ShoppingCartProvider>
 		<BrowserRouter>
+	<ShoppingCartProvider>
 			<App/>
-		</BrowserRouter>
 	</ShoppingCartProvider>
+		</BrowserRouter>
 	</StrictMode>
 )

@@ -1,4 +1,4 @@
-import {Button, Offcanvas} from "react-bootstrap";
+import {Button, Image, Offcanvas} from "react-bootstrap";
 import {useShoppingCart} from "../context/ShoppingCartContext.tsx";
 
 import CartItem from "./CartItem.tsx";
@@ -12,6 +12,8 @@ export default function Cart() {
     const item = storeItems.find(i => i.id === cartItem.id)
     return acc + (item?.price || 0) * cartItem.quantity
   }, 0)
+  
+ 
   return (
   <>
 
@@ -19,13 +21,21 @@ export default function Cart() {
       show={isCartOpen}
       onHide={closeCart}
       placement='end'
-      style={{width: "60%", padding: "60px"}}
+      style={{width: "60%", padding: "40px"}}
     >
-      <Offcanvas.Header closeButton>
+
+      
+
+      <Offcanvas.Header closeButton >
+
+        
+          <Image style={{boxShadow: '2px 2px 5px rgba(0, 0, 0, 0.2)'}} className='me-5 rounded-5' src='/images/logo.jpg' alt="logo" width={100} />
+    
         { !cartQuantity
-          ? <Offcanvas.Title>Please, add some items to cart</Offcanvas.Title>
-          : (<Offcanvas.Title> My cart:</Offcanvas.Title>)
+          ? <Offcanvas.Title className='ms-5 fw-bolder p-4 rounded-2 text-bg-warning'>Please, add some items to the cart</Offcanvas.Title>
+          : (<Offcanvas.Title className='fw-bolder p-3 rounded-2 text-bg-warning'>Total: {cartQuantity} items in my cart:</Offcanvas.Title>)
         }
+
       </Offcanvas.Header>
       <Offcanvas.Body>
         {cartItems.map(item => (
@@ -35,13 +45,14 @@ export default function Cart() {
           />
         ))}
       </Offcanvas.Body>
+      {cartQuantity !==0 && (<>
       <div style={{justifyContent: "space-between", display: "flex", padding: "10px", marginBottom: "10px"}}>
-        {/*//todo total price*/}
-        
         <span className='fw-bolder p-3 rounded-2 text-bg-warning'> Total price: </span>
         <span className='fw-bolder p-3 rounded-2 text-bg-secondary'>${totalPrice}</span>
       </div>
         <Button variant='success'>Checkout</Button>
+        </>
+        )}
     </Offcanvas>
     
   </>
