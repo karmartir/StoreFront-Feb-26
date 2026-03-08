@@ -17,11 +17,11 @@ const Navbar = () => {
 	const {openCart, cartQuantity, openSearchComponent, searchItemText, setSearchItemText} = useShoppingCart()
 
 	return (
-		<NavbarBs sticky='top' expand="lg" className="bg-light shadow-sm mb-5 vw-100" >
-			<Container >
+		<NavbarBs sticky='top' expand="lg" className="bg-light shadow-sm mb-5" >
+			<Container style={{maxWidth: '1100px'}} >
 				<NavbarBrand>
 					<NavLink to='/'>
-						<Image className='me-5 shadow-sm rounded-5' src='/images/logo.jpg' alt="logo" width={100} />
+						<Image style={{boxShadow: '2px 2px 5px rgba(0, 0, 0, 0.2)'}} className='me-5 rounded-5' src='/images/logo.jpg' alt="logo" width={100} />
 					</NavLink>
 				</NavbarBrand>
 				
@@ -36,15 +36,15 @@ const Navbar = () => {
 				
 				</NavbarCollapse>
 				{/*form for search*/}
-				<div className="d-flex me-2">
-					<Form className="d-flex">
+				{searchItemText && <div className="d-flex me-2">
+					<Form className="d-lg-flex d-sm-none">
 						<input 	value={searchItemText}
 						        onChange={(e) => setSearchItemText(e.target.value)} className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
 					</Form>
-				</div>
+				</div>}
 			<div
 				className='d-none d-lg-flex rounded-circle position-relative'
-				style={{width: '3rem', height: '3rem', background: !searchItemText ? 'lightgray' : 'teal', borderRadius: '50%', justifyContent: 'center', alignItems: 'center'}}
+				style={{width: '3rem', height: '3rem', background: !searchItemText ? 'lightgray' : 'teal', borderRadius: '50%', justifyContent: 'center', alignItems: 'center', boxShadow: '2px 2px 5px rgba(0, 0, 0, 0.4)'}}
 			onClick={() => openSearchComponent()}
 			>
 				<FaSearch size={20} color='white'/>
