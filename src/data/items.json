@@ -16,5 +16,23 @@
     "price": 30,
     "name": "iphone 19 deep blue",
     "imageUrl": "/images/blue.webp"
+  },
+  {
+    "id": 4,
+    "price": 10,
+    "name": "iphone 20 pro",
+    "imageUrl": "/images/grey.webp"
+  },
+  {
+    "id": 5,
+    "price": 20,
+    "name": "iphone 20 pro max orange",
+    "imageUrl": "/images/17.webp"
+  },
+  {
+    "id": 6,
+    "price": 30,
+    "name": "iphone 20 deep blue",
+    "imageUrl": "/images/blue.webp"
   }
 ]

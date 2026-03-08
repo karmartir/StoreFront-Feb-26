@@ -6,7 +6,7 @@ import {
 	NavbarBrand,
 	NavbarCollapse,
 	NavbarToggle,
-	Button
+	Button, Form
 } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import { useShoppingCart } from "../context/ShoppingCartContext";
@@ -14,7 +14,7 @@ import {cartLogo} from "./cartLogo.tsx";
 import {FaSearch} from "react-icons/fa";
 
 const Navbar = () => {
-	const {openCart, cartQuantity, openSearchComponent} = useShoppingCart()
+	const {openCart, cartQuantity, openSearchComponent, searchItemText, setSearchItemText} = useShoppingCart()
 
 	return (
 		<NavbarBs sticky='top' expand="lg" className="bg-light shadow-sm mb-5 vw-100" >
@@ -35,10 +35,16 @@ const Navbar = () => {
 					</Nav>
 				
 				</NavbarCollapse>
-				
+				{/*form for search*/}
+				<div className="d-flex me-2">
+					<Form className="d-flex">
+						<input 	value={searchItemText}
+						        onChange={(e) => setSearchItemText(e.target.value)} className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+					</Form>
+				</div>
 			<div
 				className='d-none d-lg-flex rounded-circle position-relative'
-				style={{width: '3rem', height: '3rem', background: 'lightgray', borderRadius: '50%', justifyContent: 'center', alignItems: 'center'}}
+				style={{width: '3rem', height: '3rem', background: !searchItemText ? 'lightgray' : 'teal', borderRadius: '50%', justifyContent: 'center', alignItems: 'center'}}
 			onClick={() => openSearchComponent()}
 			>
 				<FaSearch size={20} color='white'/>

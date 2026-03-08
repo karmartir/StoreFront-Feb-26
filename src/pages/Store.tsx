@@ -5,7 +5,7 @@ import {useShoppingCart} from "../context/ShoppingCartContext.tsx";
 import {useEffect} from "react";
 
 const Store = () => {
-	const {searchItemText, setSearchItemText, filteredItems, setFilteredItems} = useShoppingCart()
+	const {searchItemText, setSearchItemText, filteredItems, setFilteredItems, isSearchOpen} = useShoppingCart()
 	
 	useEffect(() => {
 		const filtered = storeItems.filter(item =>
@@ -15,13 +15,14 @@ const Store = () => {
 	// console.log("filteredItems: ", filteredItems)
 	return (
 		<>
-		<Form  className="mx-auto mb-4 w-75">
-			<Form.Control
-			 placeholder="Search for items"
-			 value={searchItemText}
-			 onChange={(e) => setSearchItemText(e.target.value)}
-			/>
-		</Form>
+			{isSearchOpen && <Form className="mx-auto mb-4 w-75">
+				<h1 className='text-center'>Search</h1>
+				<Form.Control
+					placeholder="Search for items"
+					value={searchItemText}
+					onChange={(e) => setSearchItemText(e.target.value)}
+				/>
+			</Form>}
 			<Row className="justify-content-center  m-auto">
 				{filteredItems.map(item => (
 				  <Col key={item.id} xs="auto" className="d-flex justify-content-center mb-4">

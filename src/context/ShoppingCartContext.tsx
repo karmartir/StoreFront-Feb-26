@@ -50,7 +50,7 @@ export function ShoppingCartProvider({children}: ShoppingCartProviderProps ) {
 	//states
 	const [cartItems, setCartItems] = useState<CartItem[]>([]); // todo use local storage
 	const [isCartOpen, setIsCartOpen] = useState(false);
-	const [isSearchOpen, setIsSearchOpen] = useState(!false);
+	const [isSearchOpen, setIsSearchOpen] = useState(false);
 	const[searchItemText, setSearchItemText] = useState<string>('');
 	const [filteredItems, setFilteredItems] = useState<StoreItem[]>(storeItems);
 	

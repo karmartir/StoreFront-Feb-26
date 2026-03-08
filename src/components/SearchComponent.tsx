@@ -11,10 +11,10 @@ export function SearchComponent(){
 			show={isSearchOpen}
 			onHide={closeSearchComponent}
 			placement='bottom'
-			style={{width: "100%"}}
+			style={{width: "100%", height: "100%"}}
 		>
 			<Offcanvas.Header closeButton>
-				<Offcanvas.Title>Search Results:</Offcanvas.Title>
+				{/*<Offcanvas.Title>Search Results:</Offcanvas.Title>*/}
 			</Offcanvas.Header>
 			<Offcanvas.Body>
 				<Store/>
