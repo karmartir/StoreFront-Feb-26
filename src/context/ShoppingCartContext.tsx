@@ -41,8 +41,7 @@ const ShoppingCartContext: Context<ShoppingCartContext> = createContext(
 
 //custom hook
 export function useShoppingCart(){
-	const context = useContext(ShoppingCartContext)
-	return context;
+	 return useContext(ShoppingCartContext)
 }
 
 //Context Provider with all our states and functions
@@ -127,7 +126,7 @@ export function ShoppingCartProvider({children}: ShoppingCartProviderProps ) {
 			openSearchComponent,
 			}}>
 			{children}
-			<Cart isCartOpen={isCartOpen}/>
+			<Cart/>
 			<SearchComponent
 				isSearchOpen={isSearchOpen}
 				closeSearchComponent={closeSearchComponent}

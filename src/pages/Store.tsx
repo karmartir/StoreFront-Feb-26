@@ -34,7 +34,7 @@ const Store = () => {
 			<Row className="justify-content-center  m-auto">
 				{filteredItems.map(item => (
 				  <Col key={item.id} xs="auto" className="d-flex justify-content-center mb-4">
-				    <StoreItem {...item}   />
+				    <StoreItem price={0} imageUrl={null} {...item}   />
 				  </Col>
 				))}
 				
