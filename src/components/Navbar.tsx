@@ -14,7 +14,7 @@ import {cartLogo} from "./cartLogo.tsx";
 import {FaSearch} from "react-icons/fa";
 
 const Navbar = () => {
-	const {openCart, cartQuantity} = useShoppingCart()
+	const {openCart, cartQuantity, openSearchComponent} = useShoppingCart()
 
 	return (
 		<NavbarBs sticky='top' expand="lg" className="bg-light shadow-sm mb-5 vw-100" >
@@ -38,7 +38,9 @@ const Navbar = () => {
 				
 			<div
 				className='d-none d-lg-flex rounded-circle position-relative'
-				style={{width: '3rem', height: '3rem', background: 'lightgray', borderRadius: '50%', justifyContent: 'center', alignItems: 'center'}}>
+				style={{width: '3rem', height: '3rem', background: 'lightgray', borderRadius: '50%', justifyContent: 'center', alignItems: 'center'}}
+			onClick={() => openSearchComponent()}
+			>
 				<FaSearch size={20} color='white'/>
 			</div>
 					<div className="d-none d-lg-block">

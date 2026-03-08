@@ -7,21 +7,12 @@ import {useEffect} from "react";
 const Store = () => {
 	const {searchItemText, setSearchItemText, filteredItems, setFilteredItems} = useShoppingCart()
 	
-	
-	// useEffect(() => {
-	// 	const filtered = storeItems.filter(
-	// 		item =>
-	// 	item.name.toLocaleLowerCase().includes(searchItemText.toLowerCase()))
-	// 	setFilteredItems(filtered)
-	// },[searchItemText, setFilteredItems])
-	//
-	
 	useEffect(() => {
 		const filtered = storeItems.filter(item =>
 		item.name.toLocaleLowerCase().includes(searchItemText.toLowerCase()))
 		setFilteredItems(filtered)
 	}, [searchItemText, setFilteredItems])
-	console.log("filteredItems: ", filteredItems)
+	// console.log("filteredItems: ", filteredItems)
 	return (
 		<>
 		<Form  className="mx-auto mb-4 w-75">

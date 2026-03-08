@@ -1,19 +1,17 @@
 import {Offcanvas} from "react-bootstrap";
 import Store from "../pages/Store.tsx";
+import {useShoppingCart} from "../context/ShoppingCartContext.tsx";
 
-type SearchComponentProps = {
-	isSearchOpen: boolean,
-	closeSearchComponent: () => void
-}
+export function SearchComponent(){
+	const {isSearchOpen, closeSearchComponent} = useShoppingCart()
+	
 
-
-export function SearchComponent({isSearchOpen, closeSearchComponent}: SearchComponentProps){
 	return (
 		<Offcanvas
 			show={isSearchOpen}
 			onHide={closeSearchComponent}
-			placement='end'
-			style={{width: "70%"}}
+			placement='bottom'
+			style={{width: "100%"}}
 		>
 			<Offcanvas.Header closeButton>
 				<Offcanvas.Title>Search Results:</Offcanvas.Title>

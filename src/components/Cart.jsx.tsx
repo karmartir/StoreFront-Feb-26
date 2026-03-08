@@ -5,6 +5,7 @@ import CartItem from "./CartItem.tsx";
 
 export default function Cart() {
   const {isCartOpen, closeCart, cartItems, cartQuantity} = useShoppingCart()
+ 
   return (
   <>
 
@@ -12,12 +13,13 @@ export default function Cart() {
       show={isCartOpen}
       onHide={closeCart}
       placement='end'
-      style={{width: "50%"}}
+      style={{width: "60%"}}
     >
       <Offcanvas.Header closeButton>
-        { !cartQuantity ? <h6>Please, add some items to cart</h6> : (
-        <Offcanvas.Title> My cart:</Offcanvas.Title>
-          )}
+        { !cartQuantity
+          ? <Offcanvas.Title>Please, add some items to cart</Offcanvas.Title>
+          : (<Offcanvas.Title> My cart:</Offcanvas.Title>)
+        }
       </Offcanvas.Header>
       <Offcanvas.Body>
         {cartItems.map(item => (
@@ -28,7 +30,8 @@ export default function Cart() {
         ))}
       </Offcanvas.Body>
       <div>
-        //todo total price
+        {/*//todo total price*/}
+        
       </div>
     </Offcanvas>
     

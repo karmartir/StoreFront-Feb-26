@@ -20,10 +20,10 @@ const {deleteCartItem} = useShoppingCart()
 			{item.name}
 		</div>
 		<div>
-			{item.price}
+		price:	${item.price}
 		</div>
 		<div>
-			{item.price * quantity}
+			total: x{quantity} = ${item.price * quantity}
 		</div>
 		<Button onClick={() => deleteCartItem(item.id)} variant='danger'>Remove</Button>
 	</Stack>

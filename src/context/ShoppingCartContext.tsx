@@ -24,6 +24,7 @@ type ShoppingCartContext = {
 	setIsSearchOpen: (open: boolean) => void,
 	isCartOpen: boolean,
 	openSearchComponent: () => void,
+	closeSearchComponent: () => void,
 }
 type CartItem = {
 	id: number,
@@ -49,7 +50,7 @@ export function ShoppingCartProvider({children}: ShoppingCartProviderProps ) {
 	//states
 	const [cartItems, setCartItems] = useState<CartItem[]>([]); // todo use local storage
 	const [isCartOpen, setIsCartOpen] = useState(false);
-	const [isSearchOpen, setIsSearchOpen] = useState(false);
+	const [isSearchOpen, setIsSearchOpen] = useState(!false);
 	const[searchItemText, setSearchItemText] = useState<string>('');
 	const [filteredItems, setFilteredItems] = useState<StoreItem[]>(storeItems);
 	
@@ -124,13 +125,11 @@ export function ShoppingCartProvider({children}: ShoppingCartProviderProps ) {
 			isSearchOpen,
 			getItemQuantity,
 			openSearchComponent,
+			closeSearchComponent
 			}}>
 			{children}
 			<Cart/>
-			<SearchComponent
-				isSearchOpen={isSearchOpen}
-				closeSearchComponent={closeSearchComponent}
-			/>
+			<SearchComponent/>
 		</ShoppingCartContext.Provider>
 	)
 }
