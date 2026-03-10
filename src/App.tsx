@@ -8,6 +8,8 @@ import Store from "./pages/Store.tsx";
 import {Route, Routes} from "react-router-dom";
 import Home from "./pages/Home.tsx";
 import AboutUs from "./pages/AboutUs.tsx";
+import {SearchComponent} from "./components/SearchComponent.tsx";
+import Cart from "./components/Cart.tsx";
 
 function App() {
 	
@@ -24,6 +26,9 @@ function App() {
 					<Route path='gallery' element={<Gallery/>}/>
 					<Route path='about-us' element={<AboutUs/>}/>
 				</Routes>
+				{/* Cart and SearchComponent rendered here */}
+				<Cart/>
+				<SearchComponent/>
 			
 			</Container>
 		

@@ -1,6 +1,7 @@
 import {Button, Stack} from "react-bootstrap";
 import storeItems from "../data/items.json"
-import {useShoppingCart} from "../context/ShoppingCartContext.tsx";
+import {useShoppingCart} from "../hooks/useShoppingCart.ts";
+
 
 type CartItemProps = {
 	id: number,

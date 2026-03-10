@@ -1,8 +1,9 @@
 import {Button, Image, Offcanvas} from "react-bootstrap";
-import {useShoppingCart} from "../context/ShoppingCartContext.tsx";
+
 
 import CartItem from "./CartItem.tsx";
 import storeItems from "../data/items.json";
+import {useShoppingCart} from "../hooks/useShoppingCart.ts";
 
 
 export default function Cart() {

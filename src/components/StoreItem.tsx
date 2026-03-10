@@ -1,5 +1,6 @@
 import {Button, Card, CardText} from "react-bootstrap";
-import { useShoppingCart } from "../context/ShoppingCartContext";
+import {useShoppingCart} from "../hooks/useShoppingCart.ts";
+
 
 type StoreItemProps = {
 	id: number,
@@ -12,6 +13,7 @@ function StoreItem({id, price, name, imageUrl}: StoreItemProps) {
 	const {getItemQuantity, increaseItemQuantity, decreaseItemQuantity, deleteCartItem} = useShoppingCart()
 
 	const quantity = getItemQuantity(id)
+	
 	return (
 		<Card className={"w-[300px] h-[400px] flex-shrink-0"}>
 			<Card.Img
@@ -23,11 +25,7 @@ function StoreItem({id, price, name, imageUrl}: StoreItemProps) {
 			<Card.Body className="flex flex-col text-center">
 				<Card.Title><strong>{name.toUpperCase()}</strong></Card.Title>
 				<CardText>Price: ${price}</CardText>
-				
-				{/*<Card.Text>*/}
-				{/*	Some quick example text to build on the card title and make up the*/}
-				{/*	bulk of the card's content.*/}
-				{/*</Card.Text>*/}
+
 				<div >
 					{quantity=== 0 ? (<Button onClick={() => increaseItemQuantity(id)} className="w-100 " variant="secondary">Add to cart</Button>)
 						: (

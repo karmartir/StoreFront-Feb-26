@@ -9,9 +9,10 @@ import {
 	Button, Form
 } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
-import { useShoppingCart } from "../context/ShoppingCartContext";
+
 import {cartLogo} from "./cartLogo.tsx";
 import {FaSearch} from "react-icons/fa";
+import {useShoppingCart} from "../hooks/useShoppingCart.ts";
 
 const Navbar = () => {
 	const {openCart, cartQuantity, openSearchComponent, searchItemText, setSearchItemText} = useShoppingCart()

@@ -1,6 +1,7 @@
 import {Offcanvas} from "react-bootstrap";
 import Store from "../pages/Store.tsx";
-import {useShoppingCart} from "../context/ShoppingCartContext.tsx";
+import {useShoppingCart} from "../hooks/useShoppingCart.ts";
+
 
 export function SearchComponent(){
 	const {isSearchOpen, closeSearchComponent} = useShoppingCart()
