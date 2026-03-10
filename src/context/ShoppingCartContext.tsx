@@ -1,4 +1,4 @@
-import {type Context, createContext, type ReactNode, useContext, useState} from "react";
+import {type Context, createContext, type ReactNode, useContext, useEffect, useMemo, useState} from "react";
 import Cart from "../components/Cart.jsx.tsx";
 import storeItems from "../data/items.json";
 import {SearchComponent} from "../components/SearchComponent.tsx";
@@ -44,11 +44,12 @@ const ShoppingCartContext: Context<ShoppingCartContext> = createContext(
 export function useShoppingCart(){
 	 return useContext(ShoppingCartContext)
 }
-
+// getting cartItems from local storage if it exists
+const initialCartItems = JSON.parse(localStorage.getItem('cartItems') || '[]') as CartItem[];
 //Context Provider with all our states and functions
 export function ShoppingCartProvider({children}: ShoppingCartProviderProps ) {
 	//states
-	const [cartItems, setCartItems] = useState<CartItem[]>([]); // todo use local storage
+	const [cartItems, setCartItems] = useState<CartItem[]>(initialCartItems);
 	const [isCartOpen, setIsCartOpen] = useState(false);
 	const [isSearchOpen, setIsSearchOpen] = useState(false);
 	const[searchItemText, setSearchItemText] = useState<string>('');
@@ -56,13 +57,16 @@ export function ShoppingCartProvider({children}: ShoppingCartProviderProps ) {
 	
 	
 	//functions	
-	// getting TOTAL quantities
-	const cartQuantity = cartItems.reduce(
-		(quantity, item) => quantity + item.quantity, 0);
+	// getting TOTAL quantities also wrapping it in useMemo for performance optimization no need to recalculate every time
+	const cartQuantity = useMemo(
+		() => cartItems.reduce(
+		(quantity, item) => quantity + item.quantity, 0), [cartItems]);
 	
+	// Open and close cart(корзину)
 	const openCart = () => setIsCartOpen(true)
 	const closeCart = () => setIsCartOpen(false)
 
+	// Open and close search component (поисковик)
 	const openSearchComponent = () => setIsSearchOpen(true)
 	const closeSearchComponent = () => setIsSearchOpen(false)
 	
@@ -71,7 +75,7 @@ export function ShoppingCartProvider({children}: ShoppingCartProviderProps ) {
 		return cartItems.find((item) => item.id === id)?.quantity || 0;
 	};
 	
-	
+	// increase item quantity
 	const increaseItemQuantity = (id: number) => {
 		setCartItems((currCartItems) => {
 			if (currCartItems.find((item) => item.id === id) == null) {
@@ -87,7 +91,7 @@ export function ShoppingCartProvider({children}: ShoppingCartProviderProps ) {
 			}
 		});
 	};
-
+// decrease item quantity
 	const decreaseItemQuantity = (id: number) => {
     setCartItems(currCartItems => {
       if (currCartItems.find(item => item.id === id)?.quantity === 1) {
@@ -103,10 +107,16 @@ export function ShoppingCartProvider({children}: ShoppingCartProviderProps ) {
       }
     });
   }
-		  
+	
+	// delete item from cart
 	const deleteCartItem = (id: number) => {
 		setCartItems(currCartItems => currCartItems.filter(item => item.id !== id));
 	}
+	// save cartItems to local storage on change cartItems
+	useEffect(() => {
+		localStorage.setItem('cartItems', JSON.stringify(cartItems));
+	}, [cartItems]);
+	
 	return (
 		<ShoppingCartContext.Provider value={{
 			cartItems,
@@ -133,5 +143,3 @@ export function ShoppingCartProvider({children}: ShoppingCartProviderProps ) {
 		</ShoppingCartContext.Provider>
 	)
 }
-
-

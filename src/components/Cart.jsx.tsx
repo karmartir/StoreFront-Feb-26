@@ -13,7 +13,7 @@ export default function Cart() {
     return acc + (item?.price || 0) * cartItem.quantity
   }, 0)
   
- 
+ console.log('cartItems', cartItems)
   return (
   <>
 
@@ -24,10 +24,7 @@ export default function Cart() {
       style={{width: "60%", padding: "40px"}}
     >
 
-      
-
       <Offcanvas.Header closeButton >
-
         
           <Image style={{boxShadow: '2px 2px 5px rgba(0, 0, 0, 0.2)'}} className='me-5 rounded-5' src='/images/logo.jpg' alt="logo" width={100} />
     
