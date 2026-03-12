@@ -10,6 +10,7 @@ import Home from "./pages/Home.tsx";
 import AboutUs from "./pages/AboutUs.tsx";
 import {SearchComponent} from "./components/SearchComponent.tsx";
 import Cart from "./components/Cart.tsx";
+import {ClickedItemPage} from "./components/ClickedItemPage.tsx";
 
 function App() {
 	
@@ -25,6 +26,7 @@ function App() {
 					<Route path='store' element={<Store/>}/>
 					<Route path='gallery' element={<Gallery/>}/>
 					<Route path='about-us' element={<AboutUs/>}/>
+					<Route path="clickedItem/:id" element={<ClickedItemPage/>}/>
 				</Routes>
 				{/* Cart and SearchComponent rendered here */}
 				<Cart/>

@@ -14,7 +14,7 @@ export default function Cart() {
     return acc + (item?.price || 0) * cartItem.quantity
   }, 0)
   
- console.log('cartItems', cartItems)
+ // console.log('cartItems', cartItems)
   return (
   <>
 
