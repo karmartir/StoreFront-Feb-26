@@ -1,106 +1,76 @@
-import {useCallback, useEffect, useMemo, useState} from "react";
+import {useState} from "react";
 import storeItems from "../data/items.json";
-import type {CartItem, ShoppingCartProviderProps, StoreItem} from "../types/types.ts";
-import { ShoppingCartContext } from "./ShoppingCartContext.ts";
+import type {CartItem, ShoppingCartProviderProps} from "../types/types.ts";
+import {ShoppingCartContext} from "./ShoppingCartContext.ts";
+import {useLocalStorage} from "../hooks/useLocalStorage.ts";
 
-// getting cartItems from local storage if it exists
-const initialCartItems = JSON.parse(localStorage.getItem('cartItems') || '[]') as CartItem[];
-//Context Provider with all our states and functions
-export function ShoppingCartProvider({children}: ShoppingCartProviderProps ) {
-	//states
-	const [cartItems, setCartItems] = useState<CartItem[]>(initialCartItems);
+
+export function ShoppingCartProvider({children}: ShoppingCartProviderProps) {
+	const [cartItems, setCartItems] = useLocalStorage<CartItem[]>('cartItems', []);
 	const [isCartOpen, setIsCartOpen] = useState(false);
 	const [isSearchOpen, setIsSearchOpen] = useState(false);
 	const [searchItemText, setSearchItemText] = useState<string>('');
-	const [filteredItems, setFilteredItems] = useState<StoreItem[]>(storeItems);
+ 
+	const filteredItems = storeItems.filter(item =>
+	item.name.toLowerCase().includes(searchItemText.toLowerCase()));
 	
+	const cartQuantity = cartItems.reduce((quantity, item) => quantity + item.quantity, 0);
 	
-	//functions
-	// getting TOTAL quantities also wrapping it in useMemo for performance optimization no need to recalculate every time
-	const cartQuantity = useMemo(
-		() => cartItems.reduce(
-		(quantity, item) => quantity + item.quantity, 0), [cartItems]);
+	const openCart = () => setIsCartOpen(true);
+	const closeCart = () => setIsCartOpen(false);
 	
-	// Open and close cart(корзину)
-	const openCart = useCallback(() => setIsCartOpen(true), []);
-	const closeCart = useCallback(() => setIsCartOpen(false), []);
-
-	// Open and close search component (поисковик)
-	const openSearchComponent = useCallback(() => setIsSearchOpen(true), []);
-	const closeSearchComponent = useCallback(() => setIsSearchOpen(false), []);
+	const openSearchComponent = () => setIsSearchOpen(true);
+	const closeSearchComponent = () => setIsSearchOpen(false);
 	
-	// getting ONE item quantity
-	const getItemQuantity = useCallback((id: number) => {
+	const getItemQuantity = (id: number) => {
 		return cartItems.find((item) => item.id === id)?.quantity || 0;
-	}, [cartItems]);
+	};
 	
-	// increase item quantity
-	const increaseItemQuantity = useCallback((id: number) => {
-		setCartItems((currCartItems) => {
-			if (currCartItems.find((item) => item.id === id) == null) {
-				return [...currCartItems, { id, quantity: 1 }];
-			} else {
-				return currCartItems.map((item) => {
-					if (item.id === id) {
-						return { ...item, quantity: item.quantity + 1 };
-					} else {
-						return item;
-					}
-				});
+	const increaseItemQuantity = (id: number) => {
+		setCartItems((curr) => {
+			if (curr.find((item) => item.id === id) == null) {
+				return [...curr, {id, quantity: 1}];
 			}
+			return curr.map((item) =>
+				item.id === id ? {...item, quantity: item.quantity + 1} : item
+			);
 		});
-	}, []);
+	};
 	
-	// decrease item quantity
-	const decreaseItemQuantity = useCallback((id: number) => {
-		setCartItems(currCartItems => {
-			if (currCartItems.find(item => item.id === id)?.quantity === 1) {
-				return currCartItems.filter(item => item.id !== id);
-			} else {
-				return currCartItems.map(item => {
-					if (item.id === id) {
-						return { ...item, quantity: item.quantity - 1 }
-					} else {
-						return item;
-					}
-				});
+	const decreaseItemQuantity = (id: number) => {
+		setCartItems((curr) => {
+			if (curr.find((item) => item.id === id)?.quantity === 1) {
+				return curr.filter((item) => item.id !== id);
 			}
+			return curr.map((item) =>
+				item.id === id ? {...item, quantity: item.quantity - 1} : item
+			);
 		});
-	}, []);
+	};
 	
-	// delete item from cart
-	const deleteCartItem = useCallback((id: number) => {
-		setCartItems(currCartItems => currCartItems.filter(item => item.id !== id));
-	}, []);
-	// save cartItems to local storage on change cartItems
-	useEffect(() => {
-		localStorage.setItem('cartItems', JSON.stringify(cartItems));
-	}, [cartItems]);
-	
-	
-	const value = useMemo(() => ({
-		cartItems,
-		cartQuantity,
-		openCart,
-		closeCart,
-		deleteCartItem,
-		increaseItemQuantity,
-		decreaseItemQuantity,
-		setIsSearchOpen,
-		searchItemText,
-		setSearchItemText,
-		filteredItems,
-		setFilteredItems,
-		isCartOpen,
-		isSearchOpen,
-		getItemQuantity,
-		openSearchComponent,
-		closeSearchComponent
-	}),  [cartItems, cartQuantity, searchItemText, filteredItems, isCartOpen, isSearchOpen, openCart, closeCart, openSearchComponent, closeSearchComponent, getItemQuantity, increaseItemQuantity, decreaseItemQuantity, deleteCartItem]);
+	const deleteCartItem = (id: number) => {
+		setCartItems((curr) => curr.filter((item) => item.id !== id));
+	};
 	
 	return (
-		<ShoppingCartContext.Provider value={value}>
+		<ShoppingCartContext.Provider value={{
+			cartItems,
+			cartQuantity,
+			openCart,
+			closeCart,
+			deleteCartItem,
+			increaseItemQuantity,
+			decreaseItemQuantity,
+			searchItemText,
+			setSearchItemText,
+			filteredItems,
+			isCartOpen,
+			isSearchOpen,
+			getItemQuantity,
+			openSearchComponent,
+			closeSearchComponent
+		}}>
 			{children}
 		</ShoppingCartContext.Provider>
-	)
+	);
 }

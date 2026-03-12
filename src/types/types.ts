@@ -19,7 +19,6 @@ export type ShoppingCartContextType = {
 	searchItemText: string
 	setSearchItemText: (text: string) => void
 	filteredItems: StoreItem[]
-	setFilteredItems: (items: StoreItem[]) => void
 	isSearchOpen: boolean
 	openCart: () => void
 	closeCart: () => void
@@ -27,7 +26,6 @@ export type ShoppingCartContextType = {
 	decreaseItemQuantity: (id: number) => void
 	deleteCartItem: (id: number) => void
 	getItemQuantity: (id: number) => number
-	setIsSearchOpen: (open: boolean) => void
 	isCartOpen: boolean
 	openSearchComponent: () => void
 	closeSearchComponent: () => void

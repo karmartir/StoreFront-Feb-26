@@ -1,20 +1,10 @@
 import {Col, Container, Form, Row} from "react-bootstrap";
-import storeItems from '../data/items.json'
 import StoreItem from "../components/StoreItem.tsx";
-import {useEffect} from "react";
 import {useShoppingCart} from "../hooks/useShoppingCart.ts";
 
 const Store = () => {
-	const {searchItemText, setSearchItemText, filteredItems, setFilteredItems, isSearchOpen} = useShoppingCart()
+	const {searchItemText, setSearchItemText, filteredItems, isSearchOpen} = useShoppingCart()
 	
-	
-	// filtering items
-	useEffect(() => {
-		const filtered = storeItems.filter(item =>
-		item.name.toLocaleLowerCase().includes(searchItemText.toLowerCase()))
-		setFilteredItems(filtered)
-	}, [searchItemText, setFilteredItems])
-
 	return (
 		<Container style={{maxWidth: '1200px'}}>
 			{isSearchOpen && <Form className="mx-auto mb-4 w-75 bg-dark-subtle p-5 rounded-5 mb-5">
