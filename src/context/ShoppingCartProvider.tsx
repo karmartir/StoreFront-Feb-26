@@ -10,6 +10,8 @@ export function ShoppingCartProvider({children}: ShoppingCartProviderProps) {
 	const [isCartOpen, setIsCartOpen] = useState(false);
 	const [isSearchOpen, setIsSearchOpen] = useState(false);
 	const [searchItemText, setSearchItemText] = useState<string>('');
+	const [darkMode, setDarkMode] = useLocalStorage<boolean>('darkMode', false);
+	const toggleDarkMode = () => setDarkMode(prevMode => !prevMode);
  
 	const filteredItems = storeItems.filter(item =>
 	item.name.toLowerCase().includes(searchItemText.toLowerCase()));
@@ -68,7 +70,9 @@ export function ShoppingCartProvider({children}: ShoppingCartProviderProps) {
 			isSearchOpen,
 			getItemQuantity,
 			openSearchComponent,
-			closeSearchComponent
+			closeSearchComponent,
+			darkMode,
+			toggleDarkMode
 		}}>
 			{children}
 		</ShoppingCartContext.Provider>

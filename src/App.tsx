@@ -11,13 +11,14 @@ import AboutUs from "./pages/AboutUs.tsx";
 import {SearchComponent} from "./components/SearchComponent.tsx";
 import Cart from "./components/Cart.tsx";
 import {ClickedItemPage} from "./components/ClickedItemPage.tsx";
+import {useShoppingCart} from "./hooks/useShoppingCart.ts";
 
 function App() {
 	
-	
+	const {darkMode} = useShoppingCart()
 	return (
 		//провайдер контекста
-		<>
+		<div data-bs-theme={darkMode ? 'dark' : 'light'} className="bg-body" style={{minHeight: '100vh'}}>
 			<Navbar/>
 			<Container>
 				
@@ -34,7 +35,7 @@ function App() {
 			
 			</Container>
 		
-		</>
+		</div>
 	)
 }
 

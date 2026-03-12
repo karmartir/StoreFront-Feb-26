@@ -7,7 +7,7 @@ import {useShoppingCart} from "../hooks/useShoppingCart.ts";
 
 
 export default function Cart() {
-  const {isCartOpen, closeCart, cartItems, cartQuantity} = useShoppingCart()
+  const {isCartOpen, closeCart, cartItems, cartQuantity, darkMode} = useShoppingCart()
  
   const totalPrice = cartItems.reduce((acc, cartItem) => {
     const item = storeItems.find(i => i.id === cartItem.id)
@@ -22,6 +22,7 @@ export default function Cart() {
       show={isCartOpen}
       onHide={closeCart}
       placement='end'
+      data-bs-theme={darkMode ? 'dark' : 'light'}
       style={{width: "60%", padding: "40px"}}
     >
 

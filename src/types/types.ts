@@ -29,4 +29,6 @@ export type ShoppingCartContextType = {
 	isCartOpen: boolean
 	openSearchComponent: () => void
 	closeSearchComponent: () => void
+	darkMode: boolean;
+	toggleDarkMode: () => void;
 }
