@@ -14,7 +14,7 @@ import { FaSearch } from "react-icons/fa";
 import { useShoppingCart } from "../hooks/useShoppingCart.ts";
 
 const Navbar = () => {
-	const { openCart, cartQuantity, openSearchComponent, searchItemText, setSearchItemText, darkMode, toggleDarkMode } = useShoppingCart()
+	const { openCart, cartQuantity, openSearchComponent, searchItemText, setSearchItemText, darkMode, toggleDarkMode, setCurrency } = useShoppingCart()
 	
 	return (
 		<NavbarBs sticky='top' expand="lg" className="shadow-sm mb-5" data-bs-theme={darkMode ? "dark" : "light"}>
@@ -69,6 +69,36 @@ const Navbar = () => {
 				>
 					{darkMode ? "☀️" : "🌙"}
 				</Button>
+				<select
+					className='ms-3 d-none d-lg-flex align-items-center justify-content-center'
+					style={{
+						width: '3rem',
+						height: '3rem',
+						borderRadius: '50%',
+						border: 'none',
+						backgroundImage: "none",
+						boxShadow: '2px 2px 5px rgba(0, 0, 0, 0.4)',
+						color: darkMode ? 'white' : 'black',
+						fontSize: '1rem',
+						cursor: 'pointer',
+						textAlignLast: 'center',
+						padding: 0,
+						appearance: 'none',
+						WebkitAppearance: 'none',
+						MozAppearance: 'none',
+					
+						backgroundRepeat: 'no-repeat',
+						backgroundPosition: 'center right 0.5rem',
+						backgroundSize: '0.65rem auto',
+					}}
+					onChange={(e) => setCurrency(e.target.value)}
+					defaultValue="USD"
+				>
+					<option value="USD">USD</option>
+					<option value="EUR">EUR</option>
+					<option value="JPY">JPY</option>
+					<option value="GBP">GBP</option>
+				</select>
 				{/* cart button */}
 				<div className="d-none d-lg-block">
 					<Button

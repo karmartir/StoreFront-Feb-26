@@ -1,6 +1,7 @@
 import {Button, Stack} from "react-bootstrap";
 import storeItems from "../data/items.json"
 import {useShoppingCart} from "../hooks/useShoppingCart.ts";
+import {useFormatCurrency} from "../hooks/useFormatCurrency.tsx";
 
 
 type CartItemProps = {
@@ -10,24 +11,29 @@ type CartItemProps = {
 
 export default function CartItem({id, quantity}: CartItemProps) {
 	const {deleteCartItem} = useShoppingCart()
+	const formatCurrency = useFormatCurrency()
 	const item = storeItems.find(el => el.id === id)
 	if (item == null) return null
+	const {name, price, imageUrl} = item
+
+	const formattedPrice = formatCurrency(price)
+	const totalPrice = formatCurrency(price * quantity)
 	return (
 		
 		
 		<Stack direction='horizontal' gap={2} className='align-items-center justify-content-between'>
-			<img src={item.imageUrl} alt={item.name} width={100}/>
+			<img src={imageUrl} alt={name} width={100}/>
 			
 			<div>
-				{item.name}
+				{name}
 			</div>
 			<div>
-				price: ${item.price}
+				price: {formattedPrice}
 			</div>
 			<div>
-				total: x{quantity} = ${item.price * quantity}
+				total: x{quantity} = {totalPrice}
 			</div>
-			<Button onClick={() => deleteCartItem(item.id)} variant='danger'>Remove</Button>
+			<Button onClick={() => deleteCartItem(id)} variant='danger'>Remove</Button>
 		</Stack>
 	
 	)

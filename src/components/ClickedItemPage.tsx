@@ -2,10 +2,12 @@ import { useParams } from "react-router-dom";
 import storeItems from "../data/items.json";
 import { Button, Container, Row, Col } from "react-bootstrap";
 import { useShoppingCart } from "../hooks/useShoppingCart.ts";
+import {useFormatCurrency} from "../hooks/useFormatCurrency.tsx";
 
 export function ClickedItemPage() {
 	const id = Number(useParams().id)  // ✅ convert once
 	const {getItemQuantity, increaseItemQuantity, decreaseItemQuantity, deleteCartItem} = useShoppingCart()
+	const formatCurrency = useFormatCurrency()
 	const quantity = getItemQuantity(id)
 	const item = storeItems.find(el => el.id === id)
 	
@@ -36,7 +38,7 @@ export function ClickedItemPage() {
 				<Col md={6} className="d-flex flex-column gap-3 align-items-start">
 					<div className="d-flex flex-column gap-1" >
 						<h2 className="fw-bold mb-1 text-body">{name}</h2>
-						<h4 className="text-success fw-semibold">${price}</h4>
+						<h4 className="text-success fw-semibold">{formatCurrency(price)}</h4>
 					</div>
 					
 					<hr/>

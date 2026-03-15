@@ -1,6 +1,7 @@
 import {Button, Card, CardText} from "react-bootstrap";
 import {useShoppingCart} from "../hooks/useShoppingCart.ts";
 import {NavLink} from "react-router-dom";
+import {useFormatCurrency} from "../hooks/useFormatCurrency.tsx";
 
 
 type StoreItemProps = {
@@ -12,6 +13,7 @@ type StoreItemProps = {
 
 function StoreItem({id, price, name, imageUrl}: StoreItemProps) {
 	const {getItemQuantity, increaseItemQuantity, decreaseItemQuantity, deleteCartItem} = useShoppingCart()
+	const formatCurrency = useFormatCurrency()
 
 	const quantity = getItemQuantity(id)
 	
@@ -31,7 +33,7 @@ function StoreItem({id, price, name, imageUrl}: StoreItemProps) {
 		</NavLink>
 			<Card.Body className="flex flex-col text-center">
 				<Card.Title><strong>{name.toUpperCase()}</strong></Card.Title>
-				<CardText>Price: ${price}</CardText>
+				<CardText>Price: {formatCurrency(price)} </CardText>
 
 				<div >
 					{quantity=== 0 ? (<Button onClick={() => increaseItemQuantity(id)} className="w-100 " variant="secondary">Add to cart</Button>)

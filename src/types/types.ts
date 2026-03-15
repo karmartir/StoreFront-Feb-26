@@ -31,4 +31,6 @@ export type ShoppingCartContextType = {
 	closeSearchComponent: () => void
 	darkMode: boolean;
 	toggleDarkMode: () => void;
+	currency: string;
+	setCurrency: (currency: string) => void;
 }

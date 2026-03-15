@@ -1,13 +1,14 @@
 import {Button, Image, Offcanvas} from "react-bootstrap";
-
-
 import CartItem from "./CartItem.tsx";
 import storeItems from "../data/items.json";
 import {useShoppingCart} from "../hooks/useShoppingCart.ts";
+import {useFormatCurrency} from "../hooks/useFormatCurrency.tsx";
+
 
 
 export default function Cart() {
   const {isCartOpen, closeCart, cartItems, cartQuantity, darkMode} = useShoppingCart()
+  const formatCurrency = useFormatCurrency()
  
   const totalPrice = cartItems.reduce((acc, cartItem) => {
     const item = storeItems.find(i => i.id === cartItem.id)
@@ -47,7 +48,7 @@ export default function Cart() {
       {cartQuantity !==0 && (<>
       <div style={{justifyContent: "space-between", display: "flex", padding: "10px", marginBottom: "10px"}}>
         <span className='fw-bolder p-3 rounded-2 text-bg-warning'> Total price: </span>
-        <span className='fw-bolder p-3 rounded-2 text-bg-secondary'>${totalPrice}</span>
+        <span className='fw-bolder p-3 rounded-2 text-bg-secondary'>{formatCurrency(totalPrice)}</span>
       </div>
         <Button variant='success'>Checkout</Button>
         </>
