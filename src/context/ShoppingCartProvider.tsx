@@ -11,7 +11,7 @@ export function ShoppingCartProvider({children}: ShoppingCartProviderProps) {
 	const [isSearchOpen, setIsSearchOpen] = useState(false);
 	const [searchItemText, setSearchItemText] = useState<string>('');
 	const [darkMode, setDarkMode] = useLocalStorage<boolean>('darkMode', false);
-	const [currency, setCurrency] = useState<string>('GBP');
+	const [currency, setCurrency] = useState<string>('USD');
 	const toggleDarkMode = () => setDarkMode(prevMode => !prevMode);
  
 	const filteredItems = storeItems.filter(item =>
