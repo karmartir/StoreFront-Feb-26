@@ -19,7 +19,7 @@ const AboutUs = () => {
 				lacinia, nulla nisl rhoncus nibh, eu euismod mi nibh vel odio. Sed eu
 				nisl nisl. Nulla ultricies nisl ut tincidunt scelerisque. Sed mattis,
 				nibh vitae dictum malesuada, ex velit blandit nunc, id sagittis velit
-				nunc vel nunc.
+				nunc vel nunc.dd
 			</p>
 		</div>
 	);
