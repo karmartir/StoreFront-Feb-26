@@ -1,8 +1,12 @@
+import {useShoppingCart} from "../hooks/useShoppingCart.ts";
+
 const AboutUs = () => {
+	const {darkMode} = useShoppingCart()
+	const textColor = darkMode ? "white" : "black";
 	return (
 		<div className="container">
-			<h1 className="text-center mb-4">About us</h1>
-			<p className="text-center mb-4">
+			<h1 className="text-center mb-4" style={{color: textColor}}>About us</h1>
+			<p className="text-center mb-4" style={{color: textColor}}>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod,
 				nibh sit amet dignissim lacinia, nulla nisl rhoncus nibh, eu euismod
 				mi nibh vel odio. Sed eu nisl nisl. Nulla ultricies nisl ut tincidunt

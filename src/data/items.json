@@ -3,36 +3,42 @@
     "id": 1,
     "price": 10,
     "name": "iphone 17 pro",
+    "description": "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
     "imageUrl": "/images/grey.webp"
   },
   {
     "id": 2,
     "price": 20,
     "name": "iphone 18 pro max orange",
+    "description": "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
     "imageUrl": "/images/17.webp"
   },
   {
     "id": 3,
     "price": 30,
     "name": "iphone 19 deep blue",
+    "description": "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
     "imageUrl": "/images/blue.webp"
   },
   {
     "id": 4,
     "price": 10,
     "name": "iphone 20 pro",
+    "description": "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
     "imageUrl": "/images/grey.webp"
   },
   {
     "id": 5,
     "price": 20,
     "name": "iphone 20 pro max orange",
+    "description": "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
     "imageUrl": "/images/17.webp"
   },
   {
     "id": 6,
     "price": 30,
     "name": "iphone 20 deep blue",
+    "description": "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.",
     "imageUrl": "/images/blue.webp"
   }
 ]
