@@ -17,7 +17,7 @@ export function ClickedItemPage() {
 		</Container>
 	)
 	
-	const {price, name, imageUrl} = item
+	const {price, name, imageUrl, description} = item
 	
 	return (
 		<Container className="py-5" style={{maxWidth: '900px'}}>
@@ -39,6 +39,7 @@ export function ClickedItemPage() {
 					<div className="d-flex flex-column gap-1" >
 						<h2 className="fw-bold mb-1 text-body">{name}</h2>
 						<h4 className="text-success fw-semibold">{formatCurrency(price)}</h4>
+						<p>{description}</p>
 					</div>
 					
 					<hr/>
