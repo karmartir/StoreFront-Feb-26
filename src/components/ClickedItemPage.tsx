@@ -37,7 +37,8 @@ export function ClickedItemPage() {
 				{/* Info column */}
 				<Col md={6} className="d-flex flex-column gap-3 align-items-start">
 					<div className="d-flex flex-column gap-1" >
-						<h2 className="fw-bold mb-1 text-body">{name}</h2>
+						<h2 className="fw-bold mb-3 text-body">{name}</h2>
+						<p className="text-body fw-lighter">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur autem cum dolores eius eligendi, enim eos esse ipsum labore laborum maxime minus nemo nihil, porro recusandae soluta tempore unde voluptatibus! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores at beatae deserunt dolor expedita, facilis incidunt iusto magnam natus, nobis placeat porro praesentium qui, sequi sint tempora veniam vitae voluptatum?</p>
 						<h4 className="text-success fw-semibold">{formatCurrency(price)}</h4>
 					</div>
 					
