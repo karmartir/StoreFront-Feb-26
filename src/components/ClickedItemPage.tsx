@@ -6,7 +6,7 @@ import {useFormatCurrency} from "../hooks/useFormatCurrency.tsx";
 
 export function ClickedItemPage() {
 	const id = Number(useParams().id)  // ✅ convert once
-	const {darkMode, getItemQuantity, increaseItemQuantity, decreaseItemQuantity, deleteCartItem} = useShoppingCart()
+	const {getItemQuantity, increaseItemQuantity, decreaseItemQuantity, deleteCartItem} = useShoppingCart()
 	const formatCurrency = useFormatCurrency()
 	const quantity = getItemQuantity(id)
 	const item = storeItems.find(el => el.id === id)
@@ -17,10 +17,8 @@ export function ClickedItemPage() {
 		</Container>
 	)
 	
-	const {price, name, imageUrl, description} = item
+	const {price, name, imageUrl} = item
 	
-	const textColor = darkMode ? "white" : "black";
-	const priceColor = darkMode ? "#0d6efd" : "green"; // or keep success class
 	return (
 		<Container className="py-5" style={{maxWidth: '900px'}}>
 			<Row className="g-5 align-items-center">
@@ -39,13 +37,8 @@ export function ClickedItemPage() {
 				{/* Info column */}
 				<Col md={6} className="d-flex flex-column gap-3 align-items-start">
 					<div className="d-flex flex-column gap-1" >
-						<h2 className="fw-bold mb-1" style={{ color: textColor }}>{name}</h2>
-						<h4 style={{ color: priceColor }}>{formatCurrency(price)}</h4>
-						<span style={{ color: textColor }}>{description}</span>
-						<p style={{ color: textColor }}>
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus beatae consequuntur ea fugiat iste labore laboriosam laborum, odit rem reprehenderit saepe tenetur voluptatem voluptatum? Doloremque exercitationem ipsum iste sapiente sit.
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus beatae consequuntur ea fugiat iste labore laboriosam laborum, odit rem reprehenderit saepe tenetur voluptatem voluptatum? Doloremque exercitationem ipsum iste sapiente sit.
-						</p>
+						<h2 className="fw-bold mb-1 text-body">{name}</h2>
+						<h4 className="text-success fw-semibold">{formatCurrency(price)}</h4>
 					</div>
 					
 					<hr/>
