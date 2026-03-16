@@ -98,6 +98,7 @@ const Navbar = () => {
 					<option value="EUR">EUR</option>
 					<option value="JPY">JPY</option>
 					<option value="GBP">GBP</option>
+					<option value="CAD">CAD</option>
 				</select>
 				{/* cart button */}
 				<div className="d-none d-lg-block">
