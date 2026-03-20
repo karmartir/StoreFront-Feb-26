@@ -8,14 +8,23 @@ export function useFormatCurrency() {
 
   useEffect(() => {
     if (currency === "USD") return;
-    // fetch conversion rate from USD → selected currency
-    fetch(`https://api.frankfurter.app/latest?from=USD&to=${currency}`)
-      .then((res) => res.json())
-      .then((data) => {
-        const finalRes = data.rates[currency];
-        if (finalRes) setRate(finalRes);
-      })
-      .catch((err) => console.error("Currency fetch error:", err));
+
+    const fetchRate = async () => {
+      try {
+        const res = await fetch(
+          `https://api.frankfurter.app/latest?from=USD&to=${currency}`,
+        );
+        if (!res.ok) throw new Error("Failed to fetch currency rate");
+
+        const data = await res.json();
+        const finalRate = data?.rates?.[currency];
+        if (finalRate !== undefined) setRate(finalRate);
+      } catch (err) {
+        console.error("Currency fetch error:", err);
+        setRate(1); // fallback
+      }
+    };
+    fetchRate();
   }, [currency]);
 
   // locale mapping for supported currencies
