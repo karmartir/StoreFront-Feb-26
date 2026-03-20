@@ -14,6 +14,7 @@ A frontend-only e-commerce mockup built from scratch — product listing, catego
 - **Category filtering** — narrow down products by category
 - **Shopping cart** — add and remove items with live quantity and total tracking
 - **Cart persistence** — cart state is saved to `localStorage` and restored on page load via `useEffect`
+- **Multi-currency support** — switch currencies and see live-converted prices formatted per locale
 
 ---
 
@@ -26,6 +27,7 @@ A frontend-only e-commerce mockup built from scratch — product listing, catego
 | UI library | React Bootstrap 5 |
 | Routing | React Router v7 |
 | Icons | react-icons |
+| Currency API | Frankfurter (live exchange rates) |
 | Build tool | Vite |
 
 ---
@@ -50,6 +52,8 @@ npm run dev
 
 **React Router v7** — page navigation is handled with the latest Router API, with routes split cleanly across pages.
 
+**`useFormatCurrency` — custom hook** — fetches live USD → target currency rates from the [Frankfurter API](https://www.frankfurter.app/) and returns a formatter function that converts any price and displays it with the correct locale (`en-US`, `fr-FR`, `en-GB`, `ja-JP`, etc.). Supports USD, EUR, GBP, JPY, and CAD out of the box.
+
 ---
 
 ## 📚 What I Practised
@@ -59,6 +63,8 @@ npm run dev
 - React Router v7 navigation and route structure
 - Cart state management without a global state library
 - localStorage read/write pattern with `useEffect`
+- Writing a custom hook that fetches live data and returns a utility function
+- `Intl.NumberFormat` for locale-aware currency formatting
 - React Bootstrap layout and component usage
 
 ---
