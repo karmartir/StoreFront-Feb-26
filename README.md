@@ -1,73 +1,62 @@
-# React + TypeScript + Vite
+# 🛒 E-Store Mockup
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A frontend-only e-commerce mockup built from scratch — product listing, category filtering, and a persistent shopping cart. No backend, no checkout flow, just clean frontend architecture with TypeScript and React Bootstrap.
 
-Currently, two official plugins are available:
+## 🚀 Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+👉 [karma-store-26.netlify.app](https://karma-store-26.netlify.app/store)
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✨ Features
 
-## Expanding the ESLint configuration
+- **Product listing** — browse all available items in a clean grid layout
+- **Category filtering** — narrow down products by category
+- **Shopping cart** — add and remove items with live quantity and total tracking
+- **Cart persistence** — cart state is saved to `localStorage` and restored on page load via `useEffect`
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🛠️ Tech Stack
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+| | |
+|---|---|
+| Framework | React 19 |
+| Language | TypeScript |
+| UI library | React Bootstrap 5 |
+| Routing | React Router v7 |
+| Icons | react-icons |
+| Build tool | Vite |
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## 📦 Getting Started
+```bash
+git clone https://github.com/karmartir/meta-store-feb-26.git
+cd meta-store-feb-26
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🔑 Key Implementation Details
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+**TypeScript throughout** — components, props, and state are fully typed, keeping the codebase predictable and refactor-friendly.
+
+**Cart persistence** — on mount, a `useEffect` reads the cart from `localStorage` so items survive page reloads without any backend.
+
+**Filtering** — category selection updates the displayed product list without any external state library, keeping logic simple and co-located.
+
+**React Router v7** — page navigation is handled with the latest Router API, with routes split cleanly across pages.
+
+---
+
+## 📚 What I Practised
+
+- Building a multi-page React app with TypeScript from scratch
+- Typing components, props, and state interfaces
+- React Router v7 navigation and route structure
+- Cart state management without a global state library
+- localStorage read/write pattern with `useEffect`
+- React Bootstrap layout and component usage
