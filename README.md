@@ -60,3 +60,9 @@ npm run dev
 - Cart state management without a global state library
 - localStorage read/write pattern with `useEffect`
 - React Bootstrap layout and component usage
+
+---
+
+## 🙏 Credits
+
+Developed under the mentorship of Julia Frolova.
